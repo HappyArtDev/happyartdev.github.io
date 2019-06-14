@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=980, user-scalable=yes">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Yli.labs</title>
+    <link rel="shortcut icon" href="https://static.parastorage.com/client/pfavico.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" href="https://static.parastorage.com/client/pfavico.ico" type="image/x-icon">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="learnings">
+    <meta property="og:title" content="learnings">
+    <meta property="og:url" content="https://www.learnings.ai">
+    <link rel="stylesheet" href="./index.css">
+    <script src="./js/jquery.min.js"></script>
+    <style>
+        .language {
+            right: 219px;
+            position: absolute;
+            top: 45px;
+            height: 19px;
+            line-height: 19px;
+            min-height: 18px;
+            width: 69px;
+            border-radius: 5px;
+            text-align: center;
+        }
+        .language a {
+            color: #000;
+            display: block;
+            border-radius: 5px;
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            background-color: rgba(231, 255, 110, 1);
+            border: solid rgba(255, 255, 255, 1) 0px;
+            box-shadow: 1px 1px #738037, 3px 3px #738037, 5px 5px #738037, 7px 7px #738037, 9px 9px #738037;
+            transition: all 0.12s ease 0s;
+        }
+        .language:hover a{
+            background-color: rgba(160, 160, 159, 1);
+            border-color: rgba(255, 255, 255, 1);
+            bottom: -9px;
+            box-shadow: 0 0 #738037;
+            left: 9px;
+            right: -9px;
+            top: 9px;
+            color: #fff;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="background"></div>
+    <header>
+        <div class="container">
+            <div>
+                <center>
+                <nav>
+                    <ul class="nav">
+                        <li class="active" onclick="slideTo('index')">主页</li>
+                        <li onclick="slideTo('production')">产品</li>
+                    </ul>
+                </nav>
+                </center>
+                <!-- <div class="language">
+                    <a href="./index.en.html">English</a>
+                </div> -->
+            </div>
+        </div> 
+    </header>
+    <section class="slogan">
+        <div class="container">
+            <h2 class="hide">科技服务</h2>
+            <h2 class="right hide">人类精神和艺术追求</h2>
+            <div class="down">
+                <img src="./images/down.png" onclick="slideTo('production')">
+            </div>
+        </div>
+    </section>
+    <section class="production">
+        <div class="container">
+            <h4>Mac App</h4>
+            <div class="list">
+                <div class="list-cell">
+                    <img src="./images/unrar_128.png">
+                    <h5>好压缩</h5>
+                    <p> “好压缩”是由YLi.Labs 开发，它是一款在MAC上实用的解压缩软件。几乎支持所有的压缩格式，简单好用。如果你有任何问题，请联系我们！</p>
+                    </b></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="copyright">
+        <div class="container">
+            <p style="text-align: center;">yi.labs  Email: ylilabs@yeah.net</p>
+        </div>
+    </footer>
+    <div class="circle">
+        <ul>
+            <li class="page page-slogan active" onclick="slideTo('index')">
+                <svg width="12" height="12" viewBox="0 0 24 24">
+                    <circle cx="12" cy="12" r="10"></circle>
+                </svg>
+            </li>
+            <li class="page page-production" onclick="slideTo('production')">
+                <svg width="12" height="12" viewBox="0 0 24 24">
+                    <circle cx="12" cy="12" r="10"></circle>
+                </svg>
+            </li>
+        </ul>
+    </div>
+    <script>
+        $(function () {
+            // var sloganFlag = true
+            var teamFlag = true
+            var environmentFlag = true
+            var environmentFlag2 = true
+            var contactusFlag = true
+
+            setTimeout(function () {
+                judge()
+            }, 0)
+            window.onscroll = function (e) {
+                judge()
+            }
+            function judge() {
+                var currentOffset = window.pageYOffset,
+                    currentOffsetBottom = window.pageYOffset + window.innerHeight,
+                    slogan = $(".slogan").offset().top,
+                    production = $(".production").offset().top,
+                    team = $(".team").offset().top,
+                    environment = $(".environment .list1").offset().top,
+                    environment2 = $(".environment .list2").offset().top,
+                    contactus = $(".contactus").offset().top,
+
+                    sloganHeight = $(".slogan").innerHeight(),
+                    productionHeight = $(".production").innerHeight(),
+                    teamHeight = $(".team").innerHeight(),
+                    environmentHeight = $(".environment .list1").innerHeight(),
+                    environment2Height = $(".environment .list2").innerHeight(),
+                    contactusHeight = $(".contactus").innerHeight();
+
+                if (currentOffsetBottom > slogan  && currentOffset < slogan + sloganHeight) {
+                    $(".slogan h2").animate({ opacity: "1" }, 1000, "swing");
+                    $($("header .nav li")[0]).addClass('active').siblings().removeClass('active')
+                    $($(".circle li")[0]).addClass('active').siblings().removeClass('active')
+                }
+                if (currentOffsetBottom > production  && currentOffset < production + productionHeight) {
+                    $($("header .nav li")[1]).addClass('active').siblings().removeClass('active')
+                    $($(".circle li")[1]).addClass('active').siblings().removeClass('active')
+                }
+                if (currentOffsetBottom > team && currentOffset < team + teamHeight) {
+                    animateTeam()
+                    $($("header .nav li")[2]).addClass('active').siblings().removeClass('active')
+                    $($(".circle li")[2]).addClass('active').siblings().removeClass('active')
+                }
+                if (currentOffsetBottom > environment && currentOffset < environment + environmentHeight) {
+                    animateEnvironment()
+                    $($("header .nav li")[3]).addClass('active').siblings().removeClass('active')
+                    $($(".circle li")[3]).addClass('active').siblings().removeClass('active')
+                }
+                if (currentOffsetBottom > environment2 && currentOffset < environment2 + environment2Height) {
+                    animateEnvironment2()
+                    $($("header .nav li")[3]).addClass('active').siblings().removeClass('active')
+                    $($(".circle li")[3]).addClass('active').siblings().removeClass('active')
+                }
+                if (currentOffsetBottom > contactus && currentOffset < contactus + contactusHeight) {
+                    animateContact()
+                    $($("header .nav li")[4]).addClass('active').siblings().removeClass('active')
+                    $($(".circle li")[4]).addClass('active').siblings().removeClass('active')
+                }
+            }
+            function animateTeam() {
+                if (teamFlag) {
+                    setTimeout(function () {
+                        $($(".team .list-cell")[0]).animate({ opacity: "1" }, 1000, "swing");
+                    }, 0)
+                    setTimeout(function () {
+                        $($(".team .list-cell")[1]).animate({ opacity: "1" }, 1000, "swing");
+                    }, 500)
+                    setTimeout(function () {
+                        $($(".team .list-cell")[2]).animate({ opacity: "1" }, 1000, "swing");
+                    }, 1000)
+                    teamFlag = false
+                }
+            }
+            function animateEnvironment() {
+                if (environmentFlag) {
+                    setTimeout(function () {
+                        $($(".environment .list .list-cell")[0]).animate({ opacity: "1" }, 1000, "swing");
+                    }, 0)
+                    environmentFlag = false
+                }
+            }
+            function animateEnvironment2() {
+                if (environmentFlag2) {
+                    setTimeout(function () {
+                        $($(".environment .list2 .list-cell")[0]).animate({ opacity: "1" }, 1000, "swing");
+                    }, 0)
+                    setTimeout(function () {
+                        $($(".environment .list2 .list-cell")[1]).animate({ opacity: "1" }, 1000, "swing");
+                    }, 300)
+                    setTimeout(function () {
+                        $($(".environment .list2 .list-cell")[2]).animate({ opacity: "1" }, 1000, "swing");
+                    }, 600)
+                    environmentFlag2 = false
+                }
+            }
+            function animateContact() {
+                if (contactusFlag) {
+                    setTimeout(function () {
+                        $($(".contactus .list .list-cell.p")[0]).animate({ opacity: "1" }, 1000, "swing");
+                    }, 0)
+                    setTimeout(function () {
+                        $($(".contactus .list .list-cell.p")[1]).animate({ opacity: "1" }, 1000, "swing");
+                    }, 500)
+                    contactusFlag = false
+                }
+            }
+            
+        })
+        function slideTo(target) {
+                if (target == "index") {
+                    $("html, body").animate({ scrollTop: '0px' }, 800, "swing")
+                } else if (target == "production") {
+                    $("html, body").animate({ scrollTop: $('.production').offset().top + 'px' }, 800, "swing")
+                } else if (target == "team") {
+                    $("html, body").animate({ scrollTop: $('.team').offset().top + 'px' }, 800, "swing")
+                } else if (target == "environment") {
+                    $("html, body").animate({ scrollTop: $('.environment').offset().top + 'px' }, 800, "swing")
+                } else if (target == "contactus") {
+                    $("html, body").animate({ scrollTop: $('.contactus').offset().top + 'px' }, 800, "swing")
+                }
+            }
+    </script>
+</body>
+
+</html>
